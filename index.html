@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degree Plan Decision Flowchart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .year-column {
+            position: relative;
+            padding: 1rem;
+            border-radius: 0.75rem;
+        }
+        .flow-shape {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0.75rem 1rem;
+            margin: 1.5rem auto;
+            min-height: 60px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        /* EPS Course Block */
+        .flow-process-eps {
+            background-color: #e0f2f1; /* teal-100 */
+            color: #0d7377; /* teal-800 */
+            border: 2px solid #4db6ac; /* teal-300 */
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 250px;
+        }
+        /* WRS Course Block */
+        .flow-process-wrs {
+            background-color: #eef2ff; /* indigo-100 */
+            color: #3730a3; /* indigo-800 */
+            border: 2px solid #818cf8; /* indigo-300 */
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 250px;
+        }
+        /* MTH Course Block */
+        .flow-process-mth {
+            background-color: #fef3c7; /* amber-100 */
+            color: #b45309; /* amber-800 */
+            border: 2px solid #fcd34d; /* amber-300 */
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 250px;
+        }
+        /* Arts & Humanities Cognate Block */
+        .flow-process-ah {
+            background-color: #fce7f3; /* pink-100 */
+            color: #9d174d; /* pink-800 */
+            border: 2px solid #f9a8d4; /* pink-300 */
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 250px;
+        }
+        /* STEM Cognate Block */
+        .flow-process-stem {
+            background-color: #e0f2fe; /* sky-100 */
+            color: #075985; /* sky-800 */
+            border: 2px solid #7dd3fc; /* sky-300 */
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 250px;
+        }
+        /* CAPS Elective Block */
+        .flow-process-caps {
+            background-color: #f0fdf4; /* green-100 */
+            color: #166534; /* green-800 */
+            border: 2px solid #86efac; /* green-300 */
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 250px;
+        }
+        /* Minor Course Block */
+        .flow-process-minor {
+            background-color: #fee2e2; /* red-100 */
+            color: #991b1b; /* red-800 */
+            border: 2px solid #fca5a5; /* red-300 */
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 250px;
+        }
+        /* General Elective Block */
+        .flow-process-elective {
+            background-color: #f3f4f6; /* gray-100 */
+            color: #374151; /* gray-700 */
+            border: 2px solid #d1d5db; /* gray-300 */
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 250px;
+        }
+        .flow-decision {
+            background-color: #fff3e0; /* orange-100 */
+            color: #9c5200; /* orange-800 */
+            border: 2px solid #ffb74d; /* orange-300 */
+            width: 80%;
+            max-width: 220px;
+            transform: rotate(45deg);
+            margin: 2.5rem auto;
+            padding: 1.5rem;
+        }
+        .flow-decision .text {
+            transform: rotate(-45deg);
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+        .flow-start-end {
+            background-color: #d1c4e9; /* deep-purple-100 */
+            color: #4527a0; /* deep-purple-800 */
+            border: 2px solid #9575cd; /* deep-purple-300 */
+            border-radius: 9999px;
+            width: 70%;
+            max-width: 200px;
+            margin: 2.5rem auto;
+        }
+        .v-arrow {
+            position: relative;
+            height: 40px;
+            width: 2px;
+            background-color: #6b7280;
+            margin: 0 auto;
+        }
+        .v-arrow::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #6b7280;
+        }
+        .v-arrow-label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #f9fafb;
+            padding: 0 0.5rem;
+            font-weight: 600;
+        }
+        .yes {
+            left: -40px;
+            color: #16a34a;
+        }
+        .year-title {
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #374151;
+            padding: 0.5rem;
+            background-color: #e5e7eb;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .semester-title {
+            font-weight: 600;
+            color: #4b5563; /* gray-600 */
+            text-align: center;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem; 
+            padding: 0.25rem;
+            background-color: #f3f4f6; /* gray-100 */
+            border-radius: 0.375rem;
+            border: 1px solid #d1d5db; /* gray-300 */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-4 sm:p-6 md:p-8">
+    <div class="max-w-screen-2xl mx-auto">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl font-bold text-gray-800">B.S.Ed. in Community and Applied Psychological Studies</h1>
+            <p class="text-gray-600 mt-2">Follow the path to plan your major courses year by year.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 lg:gap-12">
+            <!-- Freshman -->
+            <div class="year-column">
+                <h3 class="year-title">Freshman Year</h3>
+                <h4 class="semester-title">Fall</h4>
+                <div class="flow-start-end flow-shape">Start Plan</div>
+                <div class="v-arrow"></div>
+                <div class="flow-process-eps flow-shape"><b>EPS 270</b> & <b>EPS 201</b></div>
+                <div class="flow-decision flow-shape"><div class="text">SAT Math ≥550; or ACT Math ≥22; or ALEKS ≥40; or Pass MTH 099?</div></div>
+                <div class="v-arrow"><span class="v-arrow-label yes">Yes</span></div>
+                <div class="flow-process-mth flow-shape"><b>MTH 101</b></div>
+                <div class="flow-decision flow-shape"><div class="text">ACT English 18-31; or SAT Reading 430-690; or TOEFL Writing ≥18?</div></div>
+                <div class="v-arrow"><span class="v-arrow-label yes">Yes</span></div>
+                <div class="flow-process-wrs flow-shape"><b>WRS 105</b></div>
+                <div class="flow-process-ah flow-shape">Arts & Humanities Cognate</div>
+                <h4 class="semester-title">Spring</h4>
+                <div class="v-arrow"></div>
+                <div class="flow-decision flow-shape"><div class="text"><b>WRS 105</b>; or ACT English ≥32; or SAT Reading ≥700; or Foote Fellow?</div></div>
+                <div class="v-arrow"><span class="v-arrow-label yes">Yes</span></div>
+                <div class="flow-process-wrs flow-shape"><b>WRS 106</b></div>
+                <div class="flow-process-eps flow-shape"><b>EPS 311</b></div>
+                <div class="flow-process-caps flow-shape" style="padding: 0.5rem; min-height: 120px;"><b>CAPS Elective</b><br><small style="font-size: 0.7rem; line-height: 1.2;">EPS&nbsp;280, 306, 340, 365, 411, 412, 420, 430, 462, MGT&nbsp;304, EPS&nbsp;504, 587</small></div>
+                <div class="flow-process-stem flow-shape">STEM Cognate</div>
+                <div class="flow-process-ah flow-shape">Arts & Humanities Cognate</div>
+            </div>
+
+            <!-- Sophomore -->
+            <div class="year-column">
+                <h3 class="year-title">Sophomore Year</h3>
+                <h4 class="semester-title">Fall</h4>
+                <div class="flow-decision flow-shape"><div class="text">Pass <b>MTH 101</b>?</div></div>
+                <div class="v-arrow"><span class="v-arrow-label yes">Yes</span></div>
+                <div class="flow-process-eps flow-shape"><b>EPS 351</b></div>
+                <div class="flow-process-eps flow-shape"><b>EPS 291</b> & <b>EPS 361</b></div>
+                <div class="flow-process-minor flow-shape">Minor Course</div>
+                <div class="flow-process-stem flow-shape">STEM Cognate</div>
+                <h4 class="semester-title">Spring</h4>
+                <div class="v-arrow"></div>
+                <div class="flow-decision flow-shape"><div class="text">Prereqs: EPS 201 (or Co-req: EPS 311) AND WRS 105 & 106?</div></div>
+                <div class="v-arrow"><span class="v-arrow-label yes">Yes</span></div>
+                <div class="flow-process-eps flow-shape"><b>EPS 321</b></div>
+                <div class="flow-process-eps flow-shape"><b>EPS 411/412/430</b></div>
+                <div class="flow-process-minor flow-shape">Minor Course</div>
+                <div class="flow-process-elective flow-shape">Minor Course or General Elective</div>
+                <div class="flow-process-stem flow-shape">STEM Cognate</div>
+            </div>
+
+            <!-- Junior -->
+            <div class="year-column">
+                <h3 class="year-title">Junior Year</h3>
+                <h4 class="semester-title">Fall</h4>
+                <div class="flow-decision flow-shape"><div class="text">Prereq: <b>WRS 105</b> & <b>WRS 106</b>?</div></div>
+                <div class="v-arrow"><span class="v-arrow-label yes">Yes</span></div>
+                <div class="flow-process-eps flow-shape"><b>EPS 371</b></div>
+                <div class="flow-process-ah flow-shape">Arts & Humanities Cognate</div>
+                <div class="flow-process-minor flow-shape">Minor Course (6 credits)</div>
+                <div class="flow-process-elective flow-shape">General Elective</div>
+                <h4 class="semester-title">Spring</h4>
+                <div class="v-arrow"></div>
+                <div class="flow-process-eps flow-shape"><b>EPS 440</b></div>
+                <div class="flow-process-minor flow-shape">Minor Course</div>
+                <div class="flow-process-elective flow-shape">General Elective (9 credits)</div>
+            </div>
+
+            <!-- Senior -->
+            <div class="year-column">
+                <h3 class="year-title">Senior Year</h3>
+                <h4 class="semester-title">Fall</h4>
+                <div class="flow-process-eps flow-shape"><b>EPS 578</b> & <b>EPS 579</b></div>
+                <div class="flow-process-elective flow-shape">Any Elective (9 credits)</div>
+                <h4 class="semester-title">Spring</h4>
+                <div class="v-arrow"></div>
+                <div class="flow-process-eps flow-shape"><b>EPS 452</b></div>
+                <div class="flow-process-elective flow-shape">Any Elective (12 credits)</div>
+                <div class="v-arrow"></div>
+                <div class="flow-start-end flow-shape">Complete Major</div>
+            </div>
+        </div>
+        
+        <div class="mt-12 p-4 bg-white rounded-lg shadow-md text-center max-w-3xl mx-auto">
+            <h3 class="font-bold text-lg mb-2">Note:</h3>
+            <p class="text-sm text-gray-700 mb-4">This flowchart shows the prerequisite path for your major-specific courses. Remember to also complete your cognates, electives, and other university requirements each semester to reach 120 total credits.</p>
+            <div class="text-left text-sm space-y-2">
+                <p><b>Program Information:</b> For full details on the B.S.Ed. in Community and Applied Psychological Studies, visit the official bulletin: <a href="https://bulletin.miami.edu/undergraduate-academic-programs/education-human-development/educational-psychological-studies/human-social-development-bsed-human-social-development-studies-hsds/#text" target="_blank" class="text-blue-600 hover:underline">Program Link</a></p>
+                <p><b>Arts and Humanities Cognates:</b> A detailed listing of all cognates can be found at: <a href="https://cognates.miami.edu/explore/arts-humanities/" target="_blank" class="text-blue-600 hover:underline">https://cognates.miami.edu/explore/arts-humanities/</a></p>
+                <p><b>STEM Cognates:</b> The university maintains a specific webpage for STEM cognates at: <a href="https://cognates.miami.edu/explore/stem/" target="_blank" class="text-blue-600 hover:underline">https://cognates.miami.edu/explore/stem/</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
